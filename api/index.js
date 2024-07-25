@@ -1,4 +1,19 @@
 import express from 'express';
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+
+dotenv.config();
+
+const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.MONGODB_PASSWORD);
+
+mongoose
+  .connect(DB)
+  .then(() => {
+    console.log('MongoDb is connected');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const app = express();
 
