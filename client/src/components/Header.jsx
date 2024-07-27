@@ -1,9 +1,11 @@
 import {FaSearch} from 'react-icons/fa'
 import { Link } from 'react-router-dom';
-
+import icon_g from '../assets/icon-g.png'
 export default function Header() {
   return (
     <header className='bg-slate-200 shadow-md'>
+        {/* <div className='flex flex-row gap-3'>
+         <img src={icon_g} className='w-[190px] h-[50px]' alt="" srcset="" /> */}
         <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
             <Link to='/'>
             <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
@@ -27,6 +29,7 @@ export default function Header() {
                 </Link>            
             </ul>
         </div>
+        {/* </div> */}
     </header>
   )
 }
