@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { app } from "../firebase"
-import { updateUserStart, updateUserFailure, updateUserSuccess } from "../redux/user/userSlice";
+import { updateUserStart, updateUserFailure, updateUserSuccess, deleteUserFailure, deleteUserStart, deleteUserSuccess } from "../redux/user/userSlice";
 import "react-circular-progressbar/dist/styles.css";
 
 export default function Profile() {
@@ -80,6 +80,24 @@ export default function Profile() {
       setUpdateSuccess(true);
     } catch (error) {
       dispatch(updateUserFailure(error.message));
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+        dispatch(deleteUserSuccess(data));
+  
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
     }
   };
 
@@ -167,7 +185,7 @@ export default function Profile() {
         </Button>
       </form>
       <div className="text-red-700 flex justify-between mt-5">
-        <span className="cursor-pointer">Delete Account</span>
+        <span className="cursor-pointer" onClick={handleDeleteUser}>Delete Account</span>
         <span className="cursor-pointer">
           <Link to="/">Sign Out</Link>
         </span>
