@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { app } from "../firebase"
-import { updateUserStart, updateUserFailure, updateUserSuccess, deleteUserFailure, deleteUserStart, deleteUserSuccess } from "../redux/user/userSlice";
+import { updateUserStart, updateUserFailure, updateUserSuccess, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserStart, signOutUserSuccess, signOutUserFailure } from "../redux/user/userSlice";
 import "react-circular-progressbar/dist/styles.css";
 
 export default function Profile() {
@@ -52,16 +52,6 @@ export default function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setUpdateUserError(null);
-    // setUpdateUserSuccess(null);
-    // if (Object.keys(formData).length === 0) {
-    //   setUpdateUserError('No changes made');
-    //   return;
-    // }
-    // if (imageFileUploading) {
-    //   setUpdateUserError('Please wait for image to upload');
-    //   return;
-    // }
     try {
       dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
@@ -100,6 +90,21 @@ export default function Profile() {
       dispatch(deleteUserFailure(error.message));
     }
   };
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch('/api/auth/signout');
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(data.message));
+    }
+  }
 
   return (
     <div className="max-w-lg mx-auto p-3 w-full">
@@ -186,7 +191,7 @@ export default function Profile() {
       </form>
       <div className="text-red-700 flex justify-between mt-5">
         <span className="cursor-pointer" onClick={handleDeleteUser}>Delete Account</span>
-        <span className="cursor-pointer">
+        <span className="cursor-pointer" onClick={handleSignOut}>
           <Link to="/">Sign Out</Link>
         </span>
       </div>
