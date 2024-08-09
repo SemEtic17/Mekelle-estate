@@ -188,6 +188,12 @@ export default function Profile() {
   <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.5s] mt-3"></div>
 </div> : "Update"}
         </Button>
+        <Button
+          gradientDuoTone="greenToBlue"
+          outline
+        >
+        <Link to="/create-listing">Create Listing</Link>
+        </Button>
       </form>
       <div className="text-red-700 flex justify-between mt-5">
         <span className="cursor-pointer" onClick={handleDeleteUser}>Delete Account</span>
