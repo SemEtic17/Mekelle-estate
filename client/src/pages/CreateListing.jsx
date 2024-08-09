@@ -1,6 +1,69 @@
-import { Button, Checkbox, FileInput, Label, Textarea, TextInput } from 'flowbite-react'
+import { Alert, Button, Checkbox, FileInput, Label, Textarea, TextInput, } from 'flowbite-react'
+import { useState } from 'react'
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { app } from '../firebase'
 
 export default function CreateListing() {
+  const [files, setFiles] = useState([]);
+  const [formData, setFormData] = useState({
+    imageUrls: [],
+  })
+  const [imageUploadError, setImageUploadError] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  console.log(formData);
+  const handleImageSubmit = (e) => {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+      setUploading(true);
+      setImageUploadError(false);
+      const promises = [];
+
+      for (let i = 0; i < files.length; i++) {
+        promises.push(storeImage(files[i]));
+      }
+      Promise.all(promises).then((urls) => {
+        setFormData({ ...formData, imageUrls: formData.imageUrls.concat(urls) })
+        setImageUploadError(false);
+        setUploading(false);
+      }).catch((err) => {
+        setImageUploadError('Image upload failed (2 mb max per image)');
+        setUploading(false);
+      })
+    } else {
+      setImageUploadError('You can only upload 6 images per listing');
+      setUploading(false);
+    }
+  }
+
+  const storeImage = async (file) => {
+    return new Promise((resolve, reject) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
+        (error)=>{
+          reject(error);
+        },
+        ()=>{
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          })
+        }
+      )
+    })
+  }
+
+  const handleRemoveImage = (index) => {
+    setFormData({
+      ...formData,
+      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
+    })
+  }
   return (
     <main className='p-3 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Create a Listing</h1>
@@ -79,9 +142,25 @@ export default function CreateListing() {
             <span className='font-normal text-gary-600 ml-2'>The first image will be the cover (max 6)</span>
           </p>
           <div className='flex flex-row'>
-              <FileInput id="file" className='p-3 w-full' accept='image/*' multiple />
-              <Button className='disabled:opacity-80 h-[42px] mt-3' gradientDuoTone="greenToBlue" outline >Upload</Button>
+              <FileInput onChange={(e) => setFiles(e.target.files)} id="file" className='p-3 w-full' accept='image/*' multiple />
+              <Button onClick={handleImageSubmit} type='button' className='disabled:opacity-80 h-[42px] mt-3 mb-0' disabled={uploading} gradientDuoTone="greenToBlue" outline >{uploading ? <div className="flex flex-row gap-2 justify-center">
+            <p>Uploading</p>
+  <div className="w-2 h-2 rounded-full bg-black animate-bounce mt-3"></div>
+  <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.3s] mt-3"></div>
+  <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.5s] mt-3"></div>
+</div> : "Upload"}</Button>
           </div>
+          {imageUploadError && (
+        <Alert color='failure' className='mt-5'>
+          {imageUploadError}
+        </Alert>
+      )}
+      {formData.imageUrls.length > 0 && formData.imageUrls.map((url, index) => (
+       <div key={url} className='flex justify-between p-3 border items-center'>
+         <img src={url} alt="listing image" className='w-20 h-20 object-contain rounded' />
+         <Button type='button' onClick={() => handleRemoveImage(index)} color="failure">Delete</Button>
+     </div>
+      ))}
           <Button
           gradientDuoTone="greenToBlue"
           outline
@@ -89,7 +168,6 @@ export default function CreateListing() {
         Create Listing
         </Button>
         </div>
-        
       </form>
     </main>
   )
