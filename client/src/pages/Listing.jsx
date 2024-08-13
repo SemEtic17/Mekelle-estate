@@ -14,7 +14,7 @@ import {
   FaParking,
   FaShare,
 } from "react-icons/fa";
-// import Contact from "../components/Contact";
+import Contact from "../components/Contact";
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
@@ -52,7 +52,28 @@ export default function Listing() {
 
   return (
     <main>
-      {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
+      {loading && (
+        <div>
+          <div className="flex flex-col w-auto h-64 animate-pulse rounded-xl p-4 gap-4 ml-8">
+            <div className="bg-neutral-400/50 w-full h-32 animate-pulse rounded-md"></div>
+            <div className="flex flex-col gap-2">
+              <div className="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
+              <div className="bg-neutral-400/50 w-4/5 h-4 animate-pulse rounded-md"></div>
+              <div className="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
+              <div className="bg-neutral-400/50 w-2/4 h-4 animate-pulse rounded-md"></div>
+            </div>
+          </div>
+          <div className="flex flex-col w-auto h-64 animate-pulse rounded-xl p-4 gap-4 ml-8">
+            <div className="bg-neutral-400/50 w-full h-32 animate-pulse rounded-md"></div>
+            <div className="flex flex-col gap-2">
+              <div className="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
+              <div className="bg-neutral-400/50 w-4/5 h-4 animate-pulse rounded-md"></div>
+              <div className="bg-neutral-400/50 w-full h-4 animate-pulse rounded-md"></div>
+              <div className="bg-neutral-400/50 w-2/4 h-4 animate-pulse rounded-md"></div>
+            </div>
+          </div>
+        </div>
+      )}
       {error && (
         <p className="text-center my-7 text-2xl">Something went wrong!</p>
       )}
@@ -144,7 +165,7 @@ export default function Listing() {
                 Contact landlord
               </button>
             )}
-            {/* {contact && <Contact listing={listing} />} */}
+            {contact && <Contact listing={listing} />}
           </div>
         </div>
       )}
