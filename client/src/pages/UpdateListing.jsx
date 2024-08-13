@@ -291,7 +291,7 @@ export default function CreateListing() {
                 min="50"
                 max="10000000"
                 required
-                className="p-3 border border-gray-300 rounded-lg w-[60px] h-10"
+                className="p-3 border border-gray-300 rounded-lg w-auto h-10"
                 onChange={handleChange}
                 value={formData.regularPrice}
               />
@@ -308,7 +308,7 @@ export default function CreateListing() {
                   min="0"
                   max="10000000"
                   required
-                  className="p-3 border border-gray-300 rounded-lg w-[60px] h-10"
+                  className="p-3 border border-gray-300 rounded-lg w-auto h-10"
                   onChange={handleChange}
                   value={formData.discountPrice}
                 />
