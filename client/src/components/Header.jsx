@@ -56,6 +56,7 @@ export default function Header() {
                 About
               </li>
             </Link>
+            {/* <DarkThemeToggle /> */}
             <Link to="/profile">
               {currentUser ? (
                 <img
