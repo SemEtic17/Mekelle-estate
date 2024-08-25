@@ -1,0 +1,68 @@
+{
+  "header": {
+    "mekelle": "መቐለ",
+    "link_home": "ዋና ገፅ",
+    "link_about": "ብዛዕባና",
+    "search": "ኣልሽ",
+    "estate": "እስቴት",
+    "sign in": "እቶ"
+  },
+  "home": {
+    "sm_des": "መቐለ እስቴት ቀፃሊ ገዝኦም ብቕልጡፍ ብቐሊልን ብዝተመቻቸወን መንገዲ ክትረኽቡ ይገብር",
+    "sm_des2": "ክትመርጽዎም እትኽእሉ ዝተፈላለየ ብዙሕ ገዛውቲ ድማ ኣለዉና",
+    "lets start now": "ኸዚ ምምራፅ ይጀምሩ",
+    "recent offers": "ኣብ ቐረባ እዋን ዝቐረቡ ገዛዉቲ",
+    "show more offers": "ከምዚኦም ዝበሉ ተወሳኪ ኣርእይ",
+    "recent places for rent": "ኣብ ቐረባ እዋን ዝቐረቡ ገዛ ክራይ",
+    "show more places for rent": "ከምዚኦም ዝበሉ ተወሳኪ ገዛ ክራይ ኣርእይ",
+    "recent places for sale": "ኣብ ቐረባ እዋን ዝቐረቡ ዝሽወጡ ገዛውቲ",
+    "show more places for sale": "ከምዚኦም ዝበሉ ተወሳኪ ዝሽወጡ ገዛውቲ ኣርእይ"
+  },
+  "search": {
+    "search term": "ዝእለሽ ቃል",
+    "rent & sale": "ዝካረን ዝሽወጥን",
+    "type": "ዓይነት",
+    "rent": "ዝካረ",
+    "sale": "ዝሽወጥ",
+    "offer": "ቅናሽ",
+    "parking": "መቐመጢ መኪና ዘለዎ",
+    "furnished": "ምስ ኣቕሑኡ",
+    "sort": "ኣሰራርዓ",
+    "h-l": "ካብ ዝኸበረ ናብ ዝቐነሰ",
+    "l-h": "ካብ ዝቐነሰ ናብ ዝኸበረ",
+    "oldest": "ዝፀንሐ",
+    "latest": "ሓድሽ",
+    "amenities": "ዘጠቃልሎ",
+    "listing results": "ውፅኢታት",
+    "no listing found": "ንኣለሻኩም ዝኮን ውፅኢት የለን!",
+    "loading": "ኣብ ኣለሻ...",
+    "show more": "ተወሳኪ ኣርእይ"
+  },
+  "profile": {
+    "profile": "መለለይኦም",
+    "username": "መለለይ ሽም",
+    "email": "ኢሜይል",
+    "password": "መሕለፊ ቃል",
+    "update": "ኣመሓይሽ",
+    "create listing": "ሓድሽ ገዛ ልቐቕ",
+    "delete account": "መለለይ ኣጥፍእ",
+    "sign out": "ካብ መለለይ ጠቕሊልካ ውፃእ",
+    "show listings": "ዝለቐቕኩዎም ገዛውቲ ኣርእይ",
+    "edit": "ኣመሓይሽ",
+    "delete": "ኣጥፍእ",
+    "error showing listings": "ዝለቐቕኩዎም ገዛውቲ ኣብ ኣርእይ ጌጋ",
+    "your listings": "ዝለቐቕኩምዎም ገዛውቲ",
+    "loading": "ኣብ ኣለሻ..."
+  },
+  "sign": {
+    "username": "መለለይ ሽም",
+    "e-mail": "ኢሜይል",
+    "password": "መሕለፊ ቃል",
+    "continue with google": "ብ Google እቶ",
+    "dont have an account": "መለለይ የብሎምን",
+    "have an account": "መለለይ ኣልዎም",
+    "sign up": "ሓድሽ መለለይ ክፈት",
+    "sign in": "እቶ",
+    "please try again": "ካብ እንደገና ይሞክሩ"
+  }
+}

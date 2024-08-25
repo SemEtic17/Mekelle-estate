@@ -1,0 +1,68 @@
+{
+  "header": {
+    "mekelle": "Mekelle",
+    "link_home": "Home",
+    "link_about": "About",
+    "search": "Search...",
+    "estate": "Estate",
+    "sign in": "Sign in"
+  },
+  "home": {
+    "sm_des": "Mekelle Estate will help you find your home fast, easy and comfortable.",
+    "sm_des2": "We have a wide range of properties for you to choose from.",
+    "lets start now": "Let's start now...",
+    "recent offers": "Recent offers",
+    "show more offers": "Show more offers",
+    "recent places for rent": "Recent places for rent",
+    "show more places for rent": "Show more places for rent",
+    "recent places for sale": "Recent places for sale",
+    "show more places for sale": "Show more places for sale"
+  },
+  "search": {
+    "search term": "Search Term",
+    "rent & sale": "Rent & Sale",
+    "type": "Type",
+    "rent": "Rent",
+    "sale": "Sale",
+    "offer": "Offer",
+    "parking": "Parking",
+    "furnished": "Furnished",
+    "sort": "Sort",
+    "h-l": "Price high ro low",
+    "l-h": "Price low to high",
+    "oldest": "Oldest",
+    "latest": "Latest",
+    "amenities": "Amenities",
+    "listing results": "Listing results",
+    "no listing found": "No listing found!",
+    "loading": "Loading...",
+    "show more": "Show more"
+  },
+  "profile": {
+    "profile": "Profile",
+    "username": "username",
+    "email": "email",
+    "password": "password",
+    "update": "Update",
+    "create listing": "Create Lisitng",
+    "delete account": "Delete Account",
+    "sign out": "SignOut",
+    "show listings": "Show Lisitngs",
+    "edit": "Edit",
+    "delete": "Delete",
+    "error showing listings": "Error showing listings",
+    "your listings": "Your Listings",
+    "loading": "Loading..."
+  },
+  "sign": {
+    "username": "Username",
+    "e-mail": "E-mail",
+    "password": "Password",
+    "continue with google": "Continue with Google",
+    "dont have an account": "Dont have an account?",
+    "have an account": "Have an account?",
+    "sign up": "sign up",
+    "sign in": "sign in",
+    "please try again": "Please try again"
+  }
+}

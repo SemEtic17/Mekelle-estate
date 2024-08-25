@@ -2,6 +2,7 @@ import { Button, Checkbox, Label, Select, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
+import { useTranslation } from "react-i18next";
 
 export default function Search() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function Search() {
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const [showMore, setShowMore] = useState(false);
+  const [t] = useTranslation("global");
 
   //useEffect function
   useEffect(() => {
@@ -134,10 +136,10 @@ export default function Search() {
         <form onSubmit={handleSubmite} className="flex flex-col gap-8">
           <div className="flex   items-center gap-2">
             <label className="whitespace-nowrap font-semibold">
-              Search Term:
+              {t("search.search term")}:
             </label>
             <TextInput
-              placeholder="Search..."
+              placeholder={t("header.search")}
               id="searchTerm"
               type="text"
               value={sidebarData.searchTerm}
@@ -145,14 +147,16 @@ export default function Search() {
             />
           </div>
           <div className="flex items-center gap-2 flex-wrap">
-            <Label htmlFor="remember">Type:</Label>
+            <Label className="font-semibold" htmlFor="remember">
+              {t("search.type")}:
+            </Label>
             <div className="flex gap-2 items-center">
               <Checkbox
                 id="all"
                 onChange={handleChange}
                 checked={sidebarData.type === "all"}
               />
-              <span>Rent & Sale</span>
+              <span>{t("search.rent & sale")}</span>
             </div>
             <div className="flex gap-2 items-center">
               <Checkbox
@@ -160,7 +164,7 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sidebarData.type === "rent"}
               />
-              <span>Rent</span>
+              <span>{t("search.rent")}</span>
             </div>
             <div className="flex gap-2 items-center">
               <Checkbox
@@ -168,7 +172,7 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sidebarData.type === "sale"}
               />
-              <span>Sale</span>
+              <span>{t("search.sale")}</span>
             </div>
             <div className="flex gap-2 items-center">
               <Checkbox
@@ -176,18 +180,20 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sidebarData.offer}
               />
-              <span>Offer</span>
+              <span>{t("search.offer")}</span>
             </div>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
-            <Label htmlFor="remember">Amenities:</Label>
+            <Label className="font-semibold" htmlFor="remember">
+              {t("search.amenities")}:
+            </Label>
             <div className="flex gap-2 items-center">
               <Checkbox
                 id="parking"
                 onChange={handleChange}
                 checked={sidebarData.parking}
               />
-              <span>Parking</span>
+              <span>{t("search.parking")}</span>
             </div>
             <div className="flex gap-2 items-center">
               <Checkbox
@@ -195,38 +201,42 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sidebarData.furnished}
               />
-              <span>furnished</span>
+              <span>{t("search.furnished")}</span>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <label className="font-semibold">Sort:</label>
+            <label className="font-semibold">{t("search.sort")}:</label>
             <Select
               onChange={handleChange}
               defaultValue={"created_at_desc"}
               id="sort_order"
             >
-              <option value="regularPrice_desc">Price high to low</option>
-              <option value="regularPrice_asc">Price low to high</option>
-              <option value="createdAt_desc">Latest</option>
-              <option value="createdAt_asc">Oldest</option>
+              <option value="regularPrice_desc">{t("search.h-l")}</option>
+              <option value="regularPrice_asc">{t("search.l-h")}</option>
+              <option value="createdAt_desc">{t("search.latest")}</option>
+              <option value="createdAt_asc">{t("search.oldest")}</option>
             </Select>
           </div>
           <Button type="submit" outline gradientDuoTone="purpleToPink">
-            Search
+            {t("header.search")}
           </Button>
         </form>
       </div>
       <div className="w-full flex-1">
         <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5 ">
-          Listing results:
+          {t("search.listing results")}:
         </h1>
 
         <div className="p-7 flex flex-wrap gap-4">
           {!loading && listings.length === 0 && (
-            <p className="text-xl text-slate-700">No listing found!</p>
+            <p className="text-xl text-slate-700">
+              {t("search.no listing found")}
+            </p>
           )}
           {loading && (
-            <p className="text-xl text-slate-700 text-center w-full">Loading</p>
+            <p className="text-xl text-slate-700 text-center w-full">
+              {t("search.loading")}
+            </p>
           )}
           {!loading &&
             listings &&
@@ -238,7 +248,7 @@ export default function Search() {
               onClick={onShowMoreClick}
               className="text-green-700 hover:underline p-7 text-center w-full"
             >
-              Show more
+              {t("search.show more")}
             </button>
           )}
         </div>

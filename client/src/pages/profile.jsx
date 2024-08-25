@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, TextInput, Alert } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   getStorage,
   ref,
@@ -32,7 +33,7 @@ export default function Profile() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
-
+  const [t] = useTranslation("global");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -160,7 +161,9 @@ export default function Profile() {
 
   return (
     <div className="max-w-lg mx-auto p-3 w-full">
-      <h1 className="text-3xl font-semibold text-center my-4">Profile</h1>
+      <h1 className="text-3xl font-semibold text-center my-4">
+        {t("profile.profile")}
+      </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="file"
@@ -204,21 +207,21 @@ export default function Profile() {
         <TextInput
           type="text"
           id="username"
-          placeholder="username"
+          placeholder={t("profile.username")}
           defaultValue={currentUser.username}
           onChange={handleChange}
         />
         <TextInput
           type="email"
           id="email"
-          placeholder="email"
+          placeholder={t("profile.email")}
           defaultValue={currentUser.email}
           onChange={handleChange}
         />
         <TextInput
           type="password"
           id="password"
-          placeholder="password"
+          placeholder={t("profile.password")}
           onChange={handleChange}
         />
         <Button
@@ -229,25 +232,25 @@ export default function Profile() {
         >
           {loading ? (
             <div className="flex flex-row gap-2 justify-center">
-              <p>Loading</p>
+              <p>{t("profile.loading")}</p>
               <div className="w-2 h-2 rounded-full bg-black animate-bounce mt-3"></div>
               <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.3s] mt-3"></div>
               <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.5s] mt-3"></div>
             </div>
           ) : (
-            "Update"
+            t("profile.update")
           )}
         </Button>
         <Button gradientDuoTone="greenToBlue" outline>
-          <Link to="/create-listing">Create Listing</Link>
+          <Link to="/create-listing">{t("profile.create listing")}</Link>
         </Button>
       </form>
       <div className="text-red-700 flex justify-between mt-5">
         <span className="cursor-pointer" onClick={handleDeleteUser}>
-          Delete Account
+          {t("profile.delete account")}
         </span>
         <span className="cursor-pointer" onClick={handleSignOut}>
-          <Link to="/">Sign Out</Link>
+          <Link to="/">{t("profile.sign out")}</Link>
         </span>
       </div>
       {updateSuccess && (
@@ -261,7 +264,7 @@ export default function Profile() {
         </Alert>
       )}
       <button onClick={handleShowListings} className="text-green-700 w-full">
-        Show Listings
+        {t("profile.show listings")}
       </button>
       {showListingsError && (
         <Alert color="failure" className="mt-5">
@@ -271,7 +274,7 @@ export default function Profile() {
       {userListings && userListings.length > 0 && (
         <div className="flex flex-col gap-4">
           <h1 className="text-center mt-7 text-2xl font-semibold">
-            Your Listings
+            {t("profile.your listings")}
           </h1>
           {userListings.map((listing) => (
             <div
@@ -296,10 +299,12 @@ export default function Profile() {
                   onClick={() => handleListingDelete(listing._id)}
                   className="text-red-700"
                 >
-                  Delete
+                  {t("profile.delete")}
                 </button>
                 <Link to={`/update-listing/${listing._id}`}>
-                  <button className="text-green-700">Edit</button>
+                  <button className="text-green-700">
+                    {t("profile.edit")}
+                  </button>
                 </Link>
               </div>
             </div>

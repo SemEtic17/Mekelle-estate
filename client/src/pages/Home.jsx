@@ -5,13 +5,15 @@ import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import ListingItem from "../components/ListingItem";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   SwiperCore.use([Navigation]);
-  console.log(rentListings);
+  const [t] = useTranslation("global");
+
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -53,16 +55,15 @@ export default function Home() {
           <br /> place with ease
         </h1>
         <div className="text-gray-400 text-xs sm:text-sm">
-          Mekelle Estate will help you find your home fast, easy and
-          comfortable.
+          {t("home.sm_des")}
           <br />
-          We have a wide range of properties for you to choose from.
+          {t("home.sm_des2")}
         </div>
         <Link
           to={"/search"}
           className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
         >
-          Let's start now...
+          {t("home.lets start now")}
         </Link>
       </div>
       {/* swiper */}
@@ -88,13 +89,13 @@ export default function Home() {
           <div className="">
             <div className="my-3">
               <h2 className="text-2xl font-semibold text-slate-600">
-                Recent offers
+                {t("home.recent offers")}
               </h2>
               <Link
                 className="text-sm text-blue-800 hover:underline"
                 to={"/search?offer=true"}
               >
-                Show more offers
+                {t("home.show more offers")}
               </Link>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -109,13 +110,13 @@ export default function Home() {
           <div className="">
             <div className="my-3">
               <h2 className="text-2xl font-semibold text-slate-600">
-                Recent places for rent
+                {t("home.recent places for rent")}
               </h2>
               <Link
                 className="text-sm text-blue-800 hover:underline"
                 to={"/search?type=rent"}
               >
-                Show more places for rent
+                {t("home.show more places for rent")}
               </Link>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -130,13 +131,13 @@ export default function Home() {
           <div className="">
             <div className="my-3">
               <h2 className="text-2xl font-semibold text-slate-600">
-                Recent places for sale
+                {t("home.recent places for sale")}
               </h2>
               <Link
                 className="text-sm text-blue-800 hover:underline"
                 to={"/search?type=sale"}
               >
-                Show more places for sale
+                {t("home.show more places for sale")}
               </Link>
             </div>
             <div className="flex flex-wrap gap-4">
