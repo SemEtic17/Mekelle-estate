@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState("");
+  const [t] = useTranslation("global");
+
   const onChange = (e) => {
     setMessage(e.target.value);
   };
@@ -25,8 +28,9 @@ export default function Contact({ listing }) {
       {landlord && (
         <div className="flex flex-col gap-2">
           <p>
-            Contact <span className="font-semibold">{landlord.username}</span>{" "}
-            for{" "}
+            {t("listing.contact")}{" "}
+            <span className="font-semibold">{landlord.username}</span>{" "}
+            {t("listing.for")}{" "}
             <span className="font-semibold">{listing.name.toLowerCase()}</span>
           </p>
           <textarea
@@ -35,7 +39,7 @@ export default function Contact({ listing }) {
             rows="2"
             value={message}
             onChange={onChange}
-            placeholder="Enter your message here..."
+            placeholder={t("listing.enter your message here")}
             className="w-full border p-3 rounded-lg"
           ></textarea>
 
@@ -43,7 +47,7 @@ export default function Contact({ listing }) {
             to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
             className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
           >
-            Send Message
+            {t("listing.send message")}
           </Link>
         </div>
       )}
