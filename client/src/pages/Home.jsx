@@ -6,6 +6,7 @@ import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import ListingItem from "../components/ListingItem";
 import { useTranslation } from "react-i18next";
+import { FlipWords } from "../components/flip-words";
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -46,15 +47,22 @@ export default function Home() {
     };
     fetchOfferListings();
   }, []);
+
+  const words = [t("home.beautiful"), t("home.modern"), t("home.perfect")];
+
   return (
     <div>
       {/* top */}
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
-          {t("home.find your next")}{" "}
-          <span className="text-slate-500">{t("home.perfect")}</span>
+          {t("home.find your next")}
+          {""}
+          <span>
+            <FlipWords words={words} />
+          </span>
           <br /> {t("home.place with ease")}
         </h1>
+        {/* <FlipWords words={words} /> */}
         <div className="text-gray-400 text-xs sm:text-sm">
           {t("home.sm_des")}
           <br />
