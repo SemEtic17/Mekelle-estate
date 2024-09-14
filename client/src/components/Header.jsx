@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { TextInput, Select } from "flowbite-react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import { slideIn } from "../utils/motion.js";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -38,15 +40,23 @@ export default function Header() {
   return (
     <header className="bg-slate-200 shadow-md">
       <div className="flex flex-nowrap items-center">
-        {/* <img src={icon_g} className='w-[190px] h-[50px] mt-3' alt="" /> */}
         <div className="flex gap-0 sm:gap-52 justify-between items-center max-w-6xl mx-auto p-3">
           <Link to="/">
-            <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-              <span className="text-slate-500">Mekelle</span>
-              <span className="text-slate-700">Estate</span>
-            </h1>
+            <motion.h1
+              variants={slideIn("left", "spring", 0.4, 0.9)}
+              initial={{ x: "-230%" }}
+              animate="show"
+              className="flex flex-wrap"
+            >
+              <img src={icon_g} className="w-[180px] h-[50px]" alt="" />
+            </motion.h1>
           </Link>
-          <form onSubmit={handleSubmit}>
+          <motion.form
+            variants={slideIn("down", "spring", 0.4, 0.9)}
+            initial="hidden"
+            animate="show"
+            onSubmit={handleSubmit}
+          >
             <TextInput
               type="text"
               placeholder={t("header.search")}
@@ -55,8 +65,13 @@ export default function Header() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </form>
-          <ul className="flex gap-4">
+          </motion.form>
+          <motion.ul
+            variants={slideIn("right", "spring", 0.4, 0.9)}
+            initial={{ x: "230%" }}
+            animate="show"
+            className="flex gap-4"
+          >
             <Link to="/">
               <li className="hidden sm:inline text-slate-700 hover:underline">
                 {t("header.link_home")}
@@ -67,11 +82,10 @@ export default function Header() {
                 {t("header.link_about")}
               </li>
             </Link>
-            {/* <DarkThemeToggle /> */}
             <Link to="/profile">
               {currentUser ? (
                 <img
-                  className="rounded-full h-8 w-8 object-cover"
+                  className="rounded-full h-10 w-10 object-cover"
                   src={currentUser.avatar}
                   alt="profile"
                 />
@@ -81,9 +95,22 @@ export default function Header() {
                 </li>
               )}
             </Link>
-          </ul>
+          </motion.ul>
         </div>
-        <div>
+        <motion.div
+          initial={{ x: "240%", y: "55%" }}
+          animate={{
+            x: "0",
+            y: "0",
+            transition: {
+              type: "spring",
+              delay: "0.4",
+              duration: "right",
+              ease: "easeOut",
+            },
+          }}
+          className="mb-6 mr-2"
+        >
           <Select
             onClick={handleChangeLanguage}
             className="p-0 h-[20px] w-[75px] text-xs"
@@ -91,7 +118,7 @@ export default function Header() {
             <option value={"en"}>En</option>
             <option value={"tig"}>ትግ</option>
           </Select>
-        </div>
+        </motion.div>
       </div>
     </header>
   );
