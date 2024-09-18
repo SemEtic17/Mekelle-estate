@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/mke-logo.png",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -28,7 +29,8 @@
     "redux-persist": "^6.0.0",
     "swiper": "^11.1.9",
     "tailwind-merge": "^2.5.2",
-    "three": "^0.168.0"
+    "three": "^0.168.0",
+    "vite-plugin-pwa": "^0.20.5"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
