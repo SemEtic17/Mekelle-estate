@@ -65,7 +65,7 @@ const HouseCanvas = () => {
         frameloop="demand"
         shadows
         dpr={[1, 2]}
-        camera={{ position: [20, 3, 5], fov: 30 }}
+        camera={{ position: [20, 3, 5], fov: isMobile ? 40 : 30 }}
         gl={{ preserveDrawingBuffer: true }}
       >
         <Suspense fallback={<CanvasLoader />}>
