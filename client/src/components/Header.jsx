@@ -38,100 +38,91 @@ export default function Header() {
     }
   }, [location.search]);
   return (
-    <header>
-      <div className="bg-slate-200 shadow-md hidden sm:block">
-        <div className="flex flex-nowrap items-center">
-          <div className="flex gap-0 sm:gap-52 justify-between items-center max-w-6xl mx-auto p-3">
-            <Link to="/">
-              <motion.h1
-                variants={slideIn("left", "spring", 0.4, 0.9)}
-                initial={{ x: "-230%" }}
-                animate="show"
-                className="font-bold text-sm sm:text-xl flex flex-wrap items-center gap-2"
-              >
-                <img src={icon_g} className="w-[50px] h-[50px]" alt="" />
-                <div>
-                  <span className="text-slate-500">Mekelle</span>
-                  <span className="text-slate-700">Estate</span>
-                </div>
-              </motion.h1>
-            </Link>
-            <motion.form
-              variants={slideIn("down", "spring", 0.4, 0.9)}
-              initial="hidden"
+    <header className="bg-slate-200 sm:shadow-md ">
+      <div className="flex flex-nowrap items-center">
+        <div className="flex gap-0 sm:gap-52 justify-between items-center max-w-6xl mx-auto p-3">
+          <Link to="/">
+            <motion.h1
+              variants={slideIn("left", "spring", 0.4, 0.9)}
+              initial={{ x: "-230%" }}
               animate="show"
-              onSubmit={handleSubmit}
-              className="hidden lg:block max-w-[400px]"
+              className="font-bold text-sm sm:text-xl flex flex-wrap items-center gap-2"
             >
-              <TextInput
-                type="text"
-                placeholder={t("header.search")}
-                rightIcon={AiOutlineSearch}
-                className="hidden lg:inline"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </motion.form>
-            <motion.ul
-              variants={slideIn("right", "spring", 0.4, 0.9)}
-              initial={{ x: "230%" }}
-              animate="show"
-              className="flex gap-4 items-center"
-            >
-              <Link to="/">
-                <li className="hidden sm:block text-slate-700 hover:underline">
-                  {t("header.link_home")}
-                </li>
-              </Link>
-              <Link to="/about">
-                <li className="hidden sm:block text-slate-700 hover:underline">
-                  {t("header.link_about")}
-                </li>
-              </Link>
-              <Link to="/profile">
-                {currentUser ? (
-                  <img
-                    className="rounded-full h-10 w-10 object-cover"
-                    src={currentUser.avatar}
-                    alt="profile"
-                  />
-                ) : (
-                  <li className="text-slate-700 hover:underline">
-                    {t("header.sign in")}
-                  </li>
-                )}
-              </Link>
-            </motion.ul>
-          </div>
-          <motion.div
-            initial={{ x: "240%", y: "55%" }}
-            animate={{
-              x: "0",
-              y: "0",
-              transition: {
-                type: "spring",
-                delay: "0.4",
-                duration: "right",
-                ease: "easeOut",
-              },
-            }}
-            className="mb-6 mr-2"
+              <img src={icon_g} className="w-[50px] h-[50px]" alt="" />
+              <div>
+                <span className="text-slate-500">Mekelle</span>
+                <span className="text-slate-700">Estate</span>
+              </div>
+            </motion.h1>
+          </Link>
+          <motion.form
+            variants={slideIn("down", "spring", 0.4, 0.9)}
+            initial="hidden"
+            animate="show"
+            onSubmit={handleSubmit}
           >
-            <Select
-              onClick={handleChangeLanguage}
-              className="p-0 h-[20px] w-[75px] text-xs"
-            >
-              <option value={"en"}>En</option>
-              <option value={"tig"}>ትግ</option>
-            </Select>
-          </motion.div>
+            <TextInput
+              type="text"
+              placeholder={t("header.search")}
+              rightIcon={AiOutlineSearch}
+              className="hidden lg:inline"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </motion.form>
+          <motion.ul
+            variants={slideIn("right", "spring", 0.4, 0.9)}
+            initial={{ x: "230%" }}
+            animate="show"
+            className="flex gap-4 items-center"
+          >
+            <Link to="/">
+              <li className="hidden sm:inline text-slate-700 hover:underline">
+                {t("header.link_home")}
+              </li>
+            </Link>
+            <Link to="/about">
+              <li className="hidden sm:inline text-slate-700 hover:underline">
+                {t("header.link_about")}
+              </li>
+            </Link>
+            <Link to="/profile">
+              {currentUser ? (
+                <img
+                  className="rounded-full h-10 w-10 object-cover"
+                  src={currentUser.avatar}
+                  alt="profile"
+                />
+              ) : (
+                <li className="text-slate-700 hover:underline">
+                  {t("header.sign in")}
+                </li>
+              )}
+            </Link>
+          </motion.ul>
         </div>
-      </div>
-      <div className="bg-blue-500 shadow-md block sm:hidden">
-        <div className="flex justify-between items-center p-4">
-          <h1 className="text-lg font-bold">Mobile Header</h1>
-          {/* Empty for your custom mobile content */}
-        </div>
+        <motion.div
+          initial={{ x: "240%", y: "55%" }}
+          animate={{
+            x: "0",
+            y: "0",
+            transition: {
+              type: "spring",
+              delay: "0.4",
+              duration: "right",
+              ease: "easeOut",
+            },
+          }}
+          className="mb-6 mr-2"
+        >
+          <Select
+            onClick={handleChangeLanguage}
+            className="p-0 h-[20px] w-[75px] text-xs"
+          >
+            <option value={"en"}>En</option>
+            <option value={"tig"}>ትግ</option>
+          </Select>
+        </motion.div>
       </div>
     </header>
   );
