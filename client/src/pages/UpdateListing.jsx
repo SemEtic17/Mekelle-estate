@@ -17,6 +17,7 @@ import {
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -41,6 +42,7 @@ export default function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [t] = useTranslation("global");
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -76,11 +78,11 @@ export default function CreateListing() {
           setUploading(false);
         })
         .catch((err) => {
-          setImageUploadError("Image upload failed (2 mb max per image)");
+          setImageUploadError(t("createlisting.iup"));
           setUploading(false);
         });
     } else {
-      setImageUploadError("You can only upload 6 images per listing");
+      setImageUploadError(t("createlisting.yco"));
       setUploading(false);
     }
   };
@@ -152,9 +154,9 @@ export default function CreateListing() {
     e.preventDefault();
     try {
       if (formData.imageUrls.length < 1)
-        return setError("You must upload at least one image");
+        return setError(t("createlisting.ymal"));
       if (+formData.regularPrice < +formData.discountPrice)
-        return setError("Discount price must be lower than regular price");
+        return setError(t("createlisting.dpmb"));
       setLoading(true);
       setError(false);
       const res = await fetch(`/api/listing/update/${params.listingId}`, {
@@ -182,14 +184,14 @@ export default function CreateListing() {
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
-        Update a Listing
+        {t("createlisting.update a listing")}
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-4 flex-1">
           <TextInput
             type="text"
             id="name"
-            placeholder="Name"
+            placeholder={t("createlisting.name")}
             className="p-3"
             maxLength="62"
             minLength="10"
@@ -200,7 +202,7 @@ export default function CreateListing() {
           <Textarea
             type="text"
             id="description"
-            placeholder="Description"
+            placeholder={t("createlisting.description")}
             className="p-3 ml-3 w-[24rem]"
             required
             onChange={handleChange}
@@ -209,7 +211,7 @@ export default function CreateListing() {
           <TextInput
             type="text"
             id="address"
-            placeholder="Address"
+            placeholder={t("createlisting.address")}
             className="p-3"
             required
             onChange={handleChange}
@@ -222,7 +224,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.type === "sale"}
               />
-              <Label htmlFor="sale">Sell</Label>
+              <Label htmlFor="sale">{t("createlisting.sell")}</Label>
             </div>
             <div className="flex gap-2">
               <Checkbox
@@ -230,7 +232,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.type === "rent"}
               />
-              <Label htmlFor="rent">Rent</Label>
+              <Label htmlFor="rent">{t("createlisting.rent")}</Label>
             </div>
             <div className="flex gap-2">
               <Checkbox
@@ -238,7 +240,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.parking}
               />
-              <Label htmlFor="parking">Parking spot</Label>
+              <Label htmlFor="parking">{t("createlisting.parking spot")}</Label>
             </div>
             <div className="flex gap-2">
               <Checkbox
@@ -246,7 +248,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.furnished}
               />
-              <Label htmlFor="furnished">Furnished</Label>
+              <Label htmlFor="furnished">{t("createlisting.furnished")}</Label>
             </div>
             <div className="flex gap-2">
               <Checkbox
@@ -254,7 +256,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.offer}
               />
-              <Label htmlFor="offer">Offer</Label>
+              <Label htmlFor="offer">{t("createlisting.offer")}</Label>
             </div>
           </div>
           <div className="flex flex-wrap gap-6">
@@ -269,7 +271,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 value={formData.bedrooms}
               />
-              <p>Beds</p>
+              <p>{t("createlisting.beds")}</p>
             </div>
             <div className="flex items-center gap-2">
               <input
@@ -282,7 +284,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
-              <p>Baths</p>
+              <p>{t("createlisting.baths")}</p>
             </div>
             <div className="flex items-center gap-2">
               <input
@@ -296,8 +298,10 @@ export default function CreateListing() {
                 value={formData.regularPrice}
               />
               <div className="flex flex-col items-center">
-                <p>Regular price</p>
-                <span className="text-xs">($ / month)</span>
+                <p>{t("createlisting.regular price")}</p>
+                <span className="text-xs">
+                  ($ {t("createlisting./")} {t("createlisting.month")})
+                </span>
               </div>
             </div>
             {formData.offer && (
@@ -313,8 +317,10 @@ export default function CreateListing() {
                   value={formData.discountPrice}
                 />
                 <div className="flex flex-col items-center">
-                  <p>Discounted price</p>
-                  <span className="text-xs">($ / month)</span>
+                  <p>{t("createlisting.discounted price")}</p>
+                  <span className="text-xs">
+                    ($ {t("createlisting./")} {t("createlisting.month")})
+                  </span>
                 </div>
               </div>
             )}
@@ -322,9 +328,9 @@ export default function CreateListing() {
         </div>
         <div className="flex flex-col flex-1 gap-4">
           <p className="font-semibold">
-            Images:
+            {t("createlisting.images")}:
             <span className="font-normal text-gary-600 ml-2">
-              The first image will be the cover (max 6)
+              {t("createlisting.tfiwbtc")} ({t("createlisting.max")} 6)
             </span>
           </p>
           <div className="flex flex-row">
@@ -345,13 +351,13 @@ export default function CreateListing() {
             >
               {uploading ? (
                 <div className="flex flex-row gap-2 justify-center">
-                  <p>Uploading</p>
+                  <p>{t("createlisting.uploading")}</p>
                   <div className="w-2 h-2 rounded-full bg-black animate-bounce mt-3"></div>
                   <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.3s] mt-3"></div>
                   <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.5s] mt-3"></div>
                 </div>
               ) : (
-                "Upload"
+                t("createlisting.upload")
               )}
             </Button>
           </div>
@@ -376,7 +382,7 @@ export default function CreateListing() {
                   onClick={() => handleRemoveImage(index)}
                   color="failure"
                 >
-                  Delete
+                  {t("createlisting.delete")}
                 </Button>
               </div>
             ))}
@@ -388,13 +394,13 @@ export default function CreateListing() {
           >
             {loading ? (
               <div className="flex flex-row gap-2 justify-center">
-                <p>Updating</p>
+                <p>{t("createlisting.updating")}</p>
                 <div className="w-2 h-2 rounded-full bg-black animate-bounce mt-3"></div>
                 <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.3s] mt-3"></div>
                 <div className="w-2 h-2 rounded-full bg-black animate-bounce [animation-delay:-.5s] mt-3"></div>
               </div>
             ) : (
-              "Update Listing"
+              t("createlisting.update listing")
             )}
           </Button>
           {error && (
