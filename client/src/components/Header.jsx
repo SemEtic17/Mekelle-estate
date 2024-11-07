@@ -7,6 +7,7 @@ import { TextInput, Select } from "flowbite-react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { slideIn } from "../utils/motion.js";
+import { FaHome, FaUsers } from "react-icons/fa";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -40,7 +41,7 @@ export default function Header() {
   return (
     <header className="bg-slate-200 sm:shadow-md ">
       <div className="flex flex-nowrap items-center">
-        <div className="flex gap-0 sm:gap-52 justify-between items-center max-w-6xl mx-auto p-3">
+        <div className="flex gap-[7px] sm:gap-52 justify-between items-center max-w-6xl mx-auto p-3">
           <Link to="/">
             <motion.h1
               variants={slideIn("left", "spring", 0.4, 0.9)}
@@ -49,9 +50,11 @@ export default function Header() {
               className="font-bold text-sm sm:text-xl flex flex-wrap items-center gap-2"
             >
               <img src={icon_g} className="w-[50px] h-[50px]" alt="" />
-              <div>
-                <span className="text-slate-500">Mekelle</span>
-                <span className="text-slate-700">Estate</span>
+              <div className="flex flex-row">
+                <span className="text-slate-500 hidden md:block">Mekelle</span>
+                <span className="text-slate-700 hidden md:block">Estate</span>
+                <span className="text-slate-500 block sm:hidden">Mk</span>
+                <span className="text-slate-700 block sm:hidden">Estate</span>
               </div>
             </motion.h1>
           </Link>
@@ -80,10 +83,16 @@ export default function Header() {
               <li className="hidden sm:inline text-slate-700 hover:underline">
                 {t("header.link_home")}
               </li>
+              <li className="block sm:hidden">
+                <FaHome size={24} />
+              </li>
             </Link>
             <Link to="/about">
               <li className="hidden sm:inline text-slate-700 hover:underline">
                 {t("header.link_about")}
+              </li>
+              <li className="block sm:hidden">
+                <FaUsers size={24} />
               </li>
             </Link>
             <Link to="/profile">
